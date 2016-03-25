@@ -6,7 +6,7 @@ include("getAllLegs.php");
 
 	$portConnections = getAllLegs();
 	
-	print json_encode($portConnections);
+	//print json_encode($portConnections);
 
 	//Stupid but works (Pousti Sarafi):
 	//Get port names a strings, find the equivalent ids as integers
@@ -67,11 +67,11 @@ include("getAllLegs.php");
 		//Generate port names list using the result ids
 		$pathResult = routeIDsToPortNames($result);
 		
-		print json_encode($portConnections);
+		print json_encode($pathResult);
 	}
 
  
 
-return;
+//return;
 
 ?>

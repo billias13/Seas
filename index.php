@@ -152,16 +152,24 @@
 								var flightPath = new google.maps.Polyline({
 									path: flightPlanCoordinates,
 									geodesic: true,
-									strokeColor: '#00C6FF',
-									strokeOpacity: 0.5,
-									strokeWeight: 3
+									strokeColor: '#34ABCD',
+									strokeOpacity: 0.8,
+									strokeWeight: 4
 								});
 
 								flightPath.setMap(map);
 								
+								var bounds = new google.maps.LatLngBounds();
+								var markerImage = new google.maps.MarkerImage('favicon.ico',
+								new google.maps.Size(30, 30),
+								new google.maps.Point(0, 0),
+								new google.maps.Point(15, 15));
+								
 								for (var port in flightPlanCoordinates) {
 									// Add the circle for this city to the map.
-									 var sunCircle = {
+									
+									/*
+									var sunCircle = {
 										strokeColor: '#00C6FF',
 										strokeOpacity: 1.0,
 										strokeWeight: 3,
@@ -173,10 +181,22 @@
 									};
 
 									cityCircle = new google.maps.Circle(sunCircle)
-									//cityCircle.bindTo('center', marker, 'position');
+									*/
+									
+									
+									var marker = new google.maps.Marker({
+									  position: flightPlanCoordinates[port],
+									  map: map,
+									  icon: markerImage
+									});
+									
+									//extend the bounds to include each marker's position
+									bounds.extend(marker.position);
+
 								  }
 								
-						
+								//now fit the map to the newly inclusive bounds
+								map.fitBounds(bounds);
 							}
 						}               
 					});
@@ -228,7 +248,8 @@
 			disableDefaultUI: true,
 			mapTypeId: google.maps.MapTypeId.ROADMAP
 		  });
-
+		  
+		  
 
       }
 </script>
