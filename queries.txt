@@ -1,0 +1,29 @@
+//Provides the ordered sequence of ports for a given route (routeID)
+//	SELECT rs.routeID,s.PortName FROM routesdetails rs JOIN portinfo s ON rs.PortID=s.PortID WHERE rs.routeID=1 ORDER BY rs.PortOrder
+
+//Provides all routes ids that pass through a given port (name, id or whatever you want)
+//	SELECT RouteID FROM RoutesDetails WHERE PortID=(SELECT PortID FROM PortInfo WHERE PortName = "Naxos")
+
+//Get ordered route sequences for a route that passes through a given port
+//	SELECT rs.routeID,s.PortName, rs.PortOrder FROM routesdetails rs JOIN portinfo s ON rs.PortID=s.PortID WHERE rs.routeID IN 
+	( SELECT RouteID FROM RoutesDetails WHERE PortID = ( SELECT PortID FROM PortInfo WHERE PortName = "Naxos" ) ) \\\
+	ORDER BY rs.RouteID, rs.PortOrder
+	
+	
+	LOAD DATA LOCAL INFILE 'agency.txt' INTO TABLE agency FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'shapes.txt' INTO TABLE shapes FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'calendar.txt' INTO TABLE calendar FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'calendar_dates.txt' INTO TABLE calendar_dates FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'routes.txt' INTO TABLE routes FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'stops.txt' INTO TABLE stops FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'trips.txt' INTO TABLE trips FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'frequencies.txt' INTO TABLE frequencies FIELDS TERMINATED BY ',' IGNORE 1 LINES;
+
+LOAD DATA LOCAL INFILE 'stop_times.txt' INTO TABLE stop_times FIELDS TERMINATED BY ',' IGNORE 1 LINES;
